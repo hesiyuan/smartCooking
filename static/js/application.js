@@ -23,13 +23,28 @@ $(document).ready(function(){ // jQuery
     });
 
     socket.on('gesture_mode', function(msg) {
-        var mode = msg.number;
+        var mode = msg.mode;
         console.log("gesture_mode: " + mode);
+
         if(mode == 4) {
             //this is not a good practice, but player is a global variable
             //player.seekTo(10,false);
             player.pauseVideo();
             // $('#player').
+        }else if(mode == 1) {
+            // go left one second
+            console.log(player.getCurrentTime());
+            player.seekTo(player.getCurrentTime()-1, true);
+
+
+        }else if(mode == 2) {
+            //go right one second
+            console.log(player.getCurrentTime());
+            player.seekTo(player.getCurrentTime()+1, true);
+        }else if(mode == 3) {
+
+            player.playVideo();
+            
         }
        
 

@@ -18,7 +18,7 @@ def calculateAngle(target, top, bottom):
     return angle
 
 cap = cv2.VideoCapture(0)
-model = joblib.load('centerModel3.pkl') 
+model = joblib.load('centerModel4_v2.pkl') 
 while(cap.isOpened()):
     # read image
     ret, img = cap.read()
@@ -93,49 +93,9 @@ while(cap.isOpened()):
             #Ycenter.append(c[1])
             l.append(c[0])
             l.append(c[1])
-        # plt.scatter(Xcenter, Ycenter, marker = 's')
-        # clusterhull = cv2.convexHull(center)
-        # print("right arrow point:", end = " ")
-        # print(clusterhull[0][0]) # right target 
-        # # l.append(clusterhull[0][0][0])
-        # # l.append(clusterhull[0][0][1])
-        # rightAngle = calculateAngle(tuple(clusterhull[0][0]), tuple(clusterhull[1][0]), tuple(clusterhull[len(clusterhull)-1][0]))
 
-        # print("right arrow angle:", end = " ")
-        # print(rightAngle)
-        # print(clusterhull)
-
-        # now calculate left arrow angle
-        # l.append(rightAngle)
-        # first find the minX point from the clusterhull
-        # minX = [200, 200]
-        # i = 0
-        # minIndex = 0
-        # for point in clusterhull:
-        #     if point[0][0] < minX[0]:
-        #         minX = point[0]
-        #         minIndex = i
-        #     i = i+1
-
-        #print("left arrow point:", end = " ")
-        #print(minX)
-        # l.append(minX[0])
-        # l.append(minX[1])
-        #print(clusterhull[minIndex])
-        # then get the two neighor points of the minX
-        # calculate the angle formed targeted at minX point
-        #leftAngle = calculateAngle(tuple(clusterhull[minIndex][0]), tuple(clusterhull[(minIndex+1) % len(clusterhull)][0]), tuple(clusterhull[minIndex-1][0]))
-        #print("left arrow angle:", end = " ")
-        # l.append(leftAngle)
-        #print(leftAngle)
-
-        # if leftAngle < rightAngle and clusterhull[0][0][1] > minX[1]:
-        #     print("go left")
-        # elif rightAngle < 95 and clusterhull[0][0][1] > 50 and clusterhull[0][0][1] < minX[1]:
-        #     print("go right")
         prediction = model.predict([l])
-        #plt.show()
-        # if angle < 90 then a right arrow 
+
 
     
     # drawing contours
