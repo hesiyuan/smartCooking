@@ -3,6 +3,8 @@ $(document).ready(function(){ // jQuery
     //connect to the socket server.
     var socket = io.connect('http://' + document.domain + ':' + location.port + '/test');
     var numbers_received = [];
+    var seekedPosition;
+    var lastMode;
 
     socket.on('connect', function() {
         socket.emit('my event', {data: 'I\'m connected!'});
@@ -30,20 +32,37 @@ $(document).ready(function(){ // jQuery
             //this is not a good practice, but player is a global variable
             //player.seekTo(10,false);
             player.pauseVideo();
-            // $('#player').
+            lastMode = 4;
+
         }else if(mode == 1) {
             // go left one second
-            console.log(player.getCurrentTime());
-            player.seekTo(player.getCurrentTime()-1, true);
-
+            //player.getCurrentTime()
+            if(lastMode!=1) {
+                seekedPosition = player.getCurrentTime();
+            }else{
+                seekedPosition--;
+            }
+            player.seekTo(seekedPosition - 1, false);
+            lastMode = 1;
 
         }else if(mode == 2) {
             //go right one second
-            console.log(player.getCurrentTime());
-            player.seekTo(player.getCurrentTime()+1, true);
-        }else if(mode == 3) {
 
+            if(lastMode!=2) {
+                seekedPosition = player.getCurrentTime();
+            }else{
+                seekedPosition++;
+            }
+            player.seekTo(seekedPosition + 1, false);
+            lastMode = 2;
+
+        }else if(mode == 3) {
+            if(lastMode==1 || lastMode == 2) {
+                player.seekTo(seekedPosition, true);
+            }
+                        
             player.playVideo();
+            lastMode = 3;
             
         }
        
