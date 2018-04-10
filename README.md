@@ -3,4 +3,4 @@
 
 This project is written by python backend and javascript frontend
 
-[Temporary Demo](https://www.youtube.com/watch?v=sFNb7HbCxKU)
+[Temporary Demo](https://youtu.be/NzZ9WDuuArg)
